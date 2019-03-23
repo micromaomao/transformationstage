@@ -9,7 +9,8 @@ script:
   - >
     git clean -dfx &&
     npm install &&
-    npm run prepublish
+    npm run prepublish &&
+    rm .gitignore
 
 deploy:
   provider: pages
