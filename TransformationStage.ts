@@ -382,8 +382,8 @@ export class TransformationStage {
       if (this.pressState.lastTransforms && this.pressState.lastTransforms.length > 1) {
         let velocity = new TransformVelocity(this.pressState.lastTransforms, this)
         velocity.applyInertia().then(() => {
+          new PendingTransform(this.translate, this.scale, this).boundInContentBox().startAnimation()
           if (this.onAfterUserInteration) {
-            new PendingTransform(this.translate, this.scale, this).boundInContentBox().startAnimation()
             this.onAfterUserInteration()
           }
         })
@@ -708,13 +708,34 @@ class TransformVelocity {
     let dt = Date.now() - this.lastFrameTime
     let nX = this.currentX + dt * this.vX
     let nY = this.currentY + dt * this.vY
+    if (this.stage.contentSize[0] && this.stage.contentSize[1]) {
+      if (nX > 0) {
+        nX /= 1.05
+        this.vX /= 1.5
+      }
+      if (nY > 0) {
+        nY /= 1.05
+        this.vY /= 1.5
+      }
+      let minX = -this.stage.scale * this.stage.contentSize[0] + this.stage.viewportSize[0]
+      let minY = -this.stage.scale * this.stage.contentSize[1] + this.stage.viewportSize[1]
+      if (nX < minX) {
+        nX = (nX - minX) / 1.05 + minX
+        this.vX /= 1.5
+      }
+      if (nY < minY) {
+        nY = (nY - minY) / 1.05 + minY
+        this.vY /= 1.5
+      }
+    }
     this.stage.translate = [nX, nY]
     this.currentX = nX
     this.currentY = nY
     if (this.stage.onUpdate) this.stage.onUpdate()
-    const aFriction = 0.005 // px/ms^2
-    let nvX = this.vX - Math.sign(this.vX) * aFriction * dt
-    let nvY = this.vY - Math.sign(this.vY) * aFriction * dt
+    const aFrictionX = 0.005 // px/ms^2
+    const aFrictionY = 0.005 // px/ms^2
+    let nvX = this.vX - Math.sign(this.vX) * aFrictionX * dt
+    let nvY = this.vY - Math.sign(this.vY) * aFrictionY * dt
     if (Math.sign(nvX) !== Math.sign(this.vX)) {
       this.vX = 0
     } else {
