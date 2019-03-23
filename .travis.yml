@@ -7,11 +7,10 @@ node_js:
 
 script:
   - >
-    git clean -dfx &&
+    npm install -g typescript &&
+    npm install -g typedoc &&
     npm install &&
-    npm install typedoc &&
-    node_modules/.bin/typedoc --out doc/ --mode modules --ignoreCompilerErrors;
-    npm run prepublish &&
+    typedoc --out doc/ --mode modules --ignoreCompilerErrors;
     echo node_modules > .gitignore
 
 deploy:
