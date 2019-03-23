@@ -773,3 +773,5 @@ class TransformVelocity {
     }
   }
 }
+
+export {Point}
