@@ -148,7 +148,7 @@ export class TransformationStage {
       // space on left and right
       let scale = this.viewportSize[1] / rect[3]
       let x = this.viewportSize[0] / 2 - rect[2] * scale / 2
-      this.scaleAndmapPointToPoint([rect[0], rect[1]], [x, 0], scale)
+      return this.scaleAndmapPointToPoint([rect[0], rect[1]], [x, 0], scale)
     } else {
       // space on top and bottom
       let scale = this.viewportSize[0] / rect[2]
@@ -543,6 +543,9 @@ export class PendingTransform {
     this.nScale = nScale
     this.stage = stage
     this.time = time
+    if (!Number.isFinite(nTranslate[0] + nTranslate[1] + nScale)) {
+      throw new Error("Invalid parameters.")
+    }
   }
 
   /** Immediately transform the stage to be this, discarding all pervious animation. */

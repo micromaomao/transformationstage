@@ -31,7 +31,9 @@ function removeClientOffsetCache() {
   requestAnimationFrame(removeClientOffsetCache)
 }
 
-removeClientOffsetCache()
+try {
+  removeClientOffsetCache()
+} catch (e) {}
 
 export function client2view(point: Point, view: Boundable): Point {
   let cOffset = getClientOffset(view)
