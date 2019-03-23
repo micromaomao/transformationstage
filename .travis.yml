@@ -9,8 +9,10 @@ script:
   - >
     git clean -dfx &&
     npm install &&
+    npm install typedoc &&
+    node_modules/.bin/typedoc --out doc/ --mode modules --ignoreCompilerErrors;
     npm run prepublish &&
-    rm .gitignore
+    echo node_modules > .gitignore
 
 deploy:
   provider: pages
