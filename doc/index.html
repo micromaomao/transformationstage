@@ -64,6 +64,54 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
+				<h1 id="transformationstage-moving-zooming-handler">TransformationStage: moving &amp; zooming handler</h1>
+				<p>This JavaScript library implements a generic API (framework &amp; rendering surface agnostic) for a very common task:
+				allowing user to move and zoom a scene on their screen.</p>
+				<p>Demo: <a href="https://micromaomao.github.io/transformationstage/demo/image-viewer/">Simple image viewer</a></p>
+				<p>Things to notice:</p>
+				<ul>
+					<li>Use mouse &amp; mouse wheel to move</li>
+					<li>Use ctrl + wheel to zoom</li>
+					<li>Use trackpad to move &amp; zoom (including on Mac Safari)</li>
+					<li>Full touch input support (zoom and move at the same time supported).</li>
+					<li>Kinetic scrolling.</li>
+					<li>Bounding (bouncing back when content edge reached) with animation.</li>
+					<li>Maximum and minimum zoom level.</li>
+				</ul>
+				<p>Real life demo: <a href="https://paper.sc/search/?as=page&amp;query=A%20random%20sample%20of%20five%20metal%20rods%20produced%20by%20a%20machine%20is%20taken.%20Each%20rod%20is%20teste%20d%20for%20hardness.%20The%20results%2C%20in%20suitable%20units%2C%20are%20as%20follows.">Click me</a> and then click any result.</p>
+				<p>In fact, the reason why this project was built is because of the need of <a href="https://paper.sc/">that real life demo</a>. The code has been
+				extracted from that project and put here for your convinence.</p>
+				<h2 id="api-example">API example</h2>
+				<pre><code class="language-javascript"><span class="hljs-comment">// This is an ES6 module. In the case of paper.sc, it is bundled with webpack in the application build process.</span>
+<span class="hljs-keyword">import</span> {TransformationStage} <span class="hljs-keyword">from</span> <span class="hljs-string">'transformationstage'</span>
+
+<span class="hljs-comment">// You can render your stuff anywhere, but there has to be an element for event handlers to bind to.</span>
+<span class="hljs-keyword">let</span> canv = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'target'</span>)
+
+<span class="hljs-keyword">let</span> tr = <span class="hljs-keyword">new</span> TransformationStage()
+tr.bindEvents(canv)
+<span class="hljs-comment">// call tr.removeEvents(elem) to clean up event handlers.</span>
+
+<span class="hljs-comment">// Set a content size. This is usually the dimension of your render source, or Infinity (<span class="hljs-doctag">TODO:</span> Test for contentSize=Infinity).</span>
+tr.setContentSize(<span class="hljs-number">1920</span>, <span class="hljs-number">1050</span>)
+<span class="hljs-comment">// That content size will be used to bound user interaction. (Bouncing back when edge reached)</span>
+
+<span class="hljs-comment">// Initialize viewport</span>
+canv.width = <span class="hljs-number">1000</span>
+canv.height = <span class="hljs-number">800</span>
+tr.setViewportSize(canv.width, canv.height)
+
+tr.onUpdate = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+  <span class="hljs-comment">// Something changed! re-render?</span>
+
+  <span class="hljs-comment">// Map content coordinate to viewport coordinate with...</span>
+  tr.stage2view([x, y])
+  <span class="hljs-comment">// or vise versa...</span>
+  tr.view2stage([cX, cY])
+  <span class="hljs-comment">// For example:</span>
+  fillText(<span class="hljs-string">"Hello"</span>, ...tr.stage2view([width/<span class="hljs-number">2</span>, height/<span class="hljs-number">2</span>]))
+}</code></pre>
+				<p>See the <a href="./demo/image-viewer/script.js">code for the image viewer</a> (49 lines) to learn more, or visit the <a href="https://micromaomao.github.io/transformationstage/doc/modules/_transformationstage_.html">JsDoc</a> for this project.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
