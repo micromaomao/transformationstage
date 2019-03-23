@@ -1,0 +1,19 @@
+sudo: no
+dist: stretch
+group: edge
+language: node_js
+node_js:
+  - "10"
+
+script:
+  - >
+    git clean -dfx &&
+    npm install &&
+    npm run prepublish
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $gh-key
+  on:
+    branch: master
