@@ -381,14 +381,23 @@ export class TransformationStage {
     let finish = () => {
       if (this.pressState.lastTransforms && this.pressState.lastTransforms.length > 1) {
         let velocity = new TransformVelocity(this.pressState.lastTransforms, this)
+        let stagePoint = this.pressState.stagePoint
         velocity.applyInertia().then(() => {
-          new PendingTransform(this.translate, this.scale, this).boundInContentBox().startAnimation()
+          if (this.scale > this.maxScale && stagePoint) {
+            this.scaleAndmapPointToPoint(stagePoint, this.stage2view(stagePoint), this.maxScale).boundInContentBox().startAnimation()
+          } else {
+            new PendingTransform(this.translate, this.scale, this).boundInContentBox().startAnimation()
+          }
           if (this.onAfterUserInteration) {
             this.onAfterUserInteration()
           }
         })
       } else {
-        new PendingTransform(this.translate, this.scale, this).boundInContentBox().startAnimation()
+        if (this.scale > this.maxScale && this.pressState.stagePoint) {
+          this.scaleAndmapPointToPoint(this.pressState.stagePoint, this.stage2view(this.pressState.stagePoint), this.maxScale).boundInContentBox().startAnimation()
+        } else {
+          new PendingTransform(this.translate, this.scale, this).boundInContentBox().startAnimation()
+        }
         if (this.onAfterUserInteration) {
           this.onAfterUserInteration()
         }
