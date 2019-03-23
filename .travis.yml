@@ -1,0 +1,21 @@
+sudo: no
+dist: stretch
+group: edge
+language: node_js
+node_js:
+  - "10"
+
+script:
+  - >
+    npm install -g typescript &&
+    npm install -g typedoc &&
+    npm install &&
+    typedoc --out doc/ --mode modules --ignoreCompilerErrors;
+    echo node_modules > .gitignore
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GH_KEY
+  on:
+    branch: master

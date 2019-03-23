@@ -1,0 +1,25 @@
+{
+  "name": "transformationstage",
+  "version": "1.0.1",
+  "description": "",
+  "main": "dist/TransformationStage",
+  "typings": "dist/TransformationStage",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "tsc -p .",
+    "watch": "tsc -w -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micromaomao/transformationstage.git"
+  },
+  "author": "Mao Wtm <m@maowtm.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micromaomao/transformationstage/issues"
+  },
+  "homepage": "https://github.com/micromaomao/transformationstage#readme",
+  "devDependencies": {
+    "typescript": "^3.3.4000"
+  }
+}
