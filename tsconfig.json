@@ -2,8 +2,9 @@
   "compilerOptions": {
     "module": "es6",
     "target": "es6",
+    "lib": ["es2018", "dom"],
     "outDir": "./dist",
-    "declaration": true
+    "declaration": true,
   },
   "include": [
     "./*.ts",

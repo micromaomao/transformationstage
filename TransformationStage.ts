@@ -247,7 +247,7 @@ export class TransformationStage {
         this.initMove(t)
         this.lastTapTime = Date.now()
       } else if (evt.touches.length === 2) {
-        let [tA, tB] = evt.touches
+        let [tA, tB] = [evt.touches[0], evt.touches[1]]
         this.initPinch(tA, tB)
         this.lastTapTime = null
       } else {
@@ -347,7 +347,7 @@ export class TransformationStage {
             }
           } else if (evt.touches.length === 2) {
             if (this.pressState.mode !== 'double-touch') {
-              let [tA, tB] = evt.touches
+              let [tA, tB] = [evt.touches[0], evt.touches[1]]
               this.initPinch(tA, tB)
               if (this.onAfterUserInteration) {
                 this.onAfterUserInteration()
