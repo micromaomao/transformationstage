@@ -11,6 +11,7 @@ script:
     npm install -g typedoc &&
     npm install &&
     typedoc --out doc/ --mode modules --ignoreCompilerErrors;
+    touch .nojekyll &&
     echo node_modules > .gitignore
 
 deploy:
