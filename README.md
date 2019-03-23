@@ -14,7 +14,7 @@ Things to notice:
   - Bounding (bouncing back when content edge reached) with animation.
   - Maximum and minimum zoom level.
 
-Real life demo: [Click me](https://paper.sc/search/?as=page&query=A%20random%20sample%20of%20five%20metal%20rods%20produced%20by%20a%20machine%20is%20taken.%20Each%20rod%20is%20teste%20d%20for%20hardness.%20The%20results%2C%20in%20suitable%20units%2C%20are%20as%20follows.) and then click any result.
+Real life demo: [Click me](https://paper.sc/search/?as=page&query=A%20random%20sample%20of%20five%20metal%20rods%20produced%20by%20a%20machine%20is%20taken.%20Each%20rod%20is%20teste%20d%20for%20hardness.%20The%20results%2C%20in%20suitable%20units%2C%20are%20as%20follows.) and then click any result. ( Wait for javascript to load before clicking, otherwise it will simply open the pdf in your browser. )
 
 In fact, the reason why this project was built is because of the need of [that real life demo](https://paper.sc/). The code has been
 extracted from that project and put here for your convinence.
