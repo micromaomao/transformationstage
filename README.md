@@ -1,5 +1,7 @@
 # TransformationStage: moving & zooming handler
 
+![demo gif](demo.gif)
+
 This JavaScript library implements a generic API (framework & rendering surface agnostic) for a very common task:
 allowing user to move and zoom a scene on their screen.
 
